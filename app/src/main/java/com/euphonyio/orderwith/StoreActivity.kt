@@ -137,14 +137,23 @@ class StoreActivity : ComponentActivity() {
 //        }
 
         // EuPI 방식. RequestCodeEnum.MENU_REQUEST 주파수를 들었을때 작업 수행
-        mEuPIRxManager.setOnWaveKeyPressed(RequestCodeEnum.MENU_REQUEST.code.toInt()) {
-            Toast.makeText(this, "menu request detected", Toast.LENGTH_SHORT).show()
-        }
+//        /**
+//         * 해당 주파수의 음파가 인식될 때 계속 호출되는 API
+//         * */
+//        mEuPIRxManager.setOnWaveKeyPressed(RequestCodeEnum.MENU_REQUEST.code.toInt()) {
+//            Toast.makeText(this, "menu request detected", Toast.LENGTH_SHORT).show()
+//        }
+        /**
+         * 해당 주파수의 음파가 발생하고 꺼졌을 때 최초 1회 인식하는 API
+         * */
         mEuPIRxManager.setOnWaveKeyUp(RequestCodeEnum.MENU_REQUEST.code.toInt()) {
-            Toast.makeText(this, "menu request detected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "menu request detected :: setOnWaveKeyUp", Toast.LENGTH_SHORT).show()
         }
+        /**
+         * 해당 주파수의 음파가 발생했을 때 최초 1회 인식하는 API
+         * */
         mEuPIRxManager.setOnWaveKeyDown(RequestCodeEnum.MENU_REQUEST.code.toInt()) {
-            Toast.makeText(this, "menu request detected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "menu request detected :: setOnWaveKeyDown", Toast.LENGTH_SHORT).show()
         }
 
         if (mEuPIRxManager.listen()) {
