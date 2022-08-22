@@ -113,7 +113,7 @@ class CustomerActivity : ComponentActivity(), CoroutineScope {
 
             // EuPI를 이용한 방법
             mEuPITxManager.setMode(EuOption.ModeType.EUPI)
-            mEuPITxManager.callEuPI(RequestCodeEnum.MENU_REQUEST.code, EuTxManager.EuPIDuration.LENGTH_FOREVER)
+            mEuPITxManager.callEuPI(RequestCodeEnum.MENU_REQUEST.code, EuTxManager.EuPIDuration.LENGTH_LONG)
         } else {
             _isSpeaking.postValue(false)
             txManager.stop()
@@ -157,8 +157,10 @@ class CustomerActivity : ComponentActivity(), CoroutineScope {
         }
     }
 
-    /** 데이터 파싱해서 리스트로 저장
-     *  create menu item list */
+    /**
+     * 데이터 파싱해서 리스트로 저장
+     *  create menu item list
+     *  */
     private fun parseMenuItem(receivedData: String): ArrayList<OrderItem> {
         val orderItemList = arrayListOf<OrderItem>()
 
@@ -478,6 +480,8 @@ class CustomerActivity : ComponentActivity(), CoroutineScope {
 
                         // send the order button
                         Button(
+                            // TODO: OK 버튼 두번 클릭 시 앱이 죽는 현상
+                            // TODO: 로그에는 "code cache collection이 가득찼다는 로그가 남아있음"
                             onClick = {
                                 launch(coroutineContext) {
                                     transmitOrder()
